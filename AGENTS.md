@@ -23,7 +23,7 @@ packages/<name>/
 - Sample content: no real people's data, example addresses (`example.com`, `.test`), images light enough to keep the package small.
 - Packages use only the panel's, the CMS's and the starter kit's `@api` classes.
 - Every PHP file starts `declare(strict_types=1);`. Larastan runs at `level: max`.
-- Before opening a PR: `composer test`, `composer lint`, `composer analyse`.
+- Before opening a PR: `composer test`, `composer lint`, `composer analyse`, and `npm run test:frontend` (node:test, `tests/Frontend`) when a starter's script changed.
 - Don't commit `vendor/`, `composer.lock`, `.env` or the `sunrice/` checkout.
 
 ## Commands
@@ -33,4 +33,5 @@ composer test      # Pest
 composer lint      # Pint (test mode)
 composer format    # Pint (fix)
 composer analyse   # Larastan
+npm run test:frontend   # the starters' scripts (node:test)
 ```
