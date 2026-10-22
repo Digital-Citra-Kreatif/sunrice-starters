@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "style": {
+    "file": "assets/fonts-CZg4KRw_.css",
+    "familyStyles": {
+      "serif": "@font-face {\n  font-family: \"Cormorant Garamond\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"/lumina/assets/cormorant-garamond-500-normal-BsRWmXhO.woff2\") format(\"woff2\");\n}\n\n@font-face {\n  font-family: \"Cormorant Garamond\";\n  font-style: italic;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"/lumina/assets/cormorant-garamond-500-italic-Y14P-dkT.woff2\") format(\"woff2\");\n}\n\n@font-face {\n  font-family: \"Cormorant Garamond\";\n  font-style: normal;\n  font-weight: 600;\n  font-display: swap;\n  src: url(\"/lumina/assets/cormorant-garamond-600-normal-Co1r35X9.woff2\") format(\"woff2\");\n}\n\n@font-face {\n  font-family: \"Cormorant Garamond\";\n  font-style: italic;\n  font-weight: 600;\n  font-display: swap;\n  src: url(\"/lumina/assets/cormorant-garamond-600-italic-DCuhXWyK.woff2\") format(\"woff2\");\n}\n\n.font-serif {\n  font-family: var(--font-serif);\n}",
+      "sans": "@font-face {\n  font-family: \"Manrope\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: swap;\n  src: url(\"/lumina/assets/manrope-400-normal-PaqtzbVb.woff2\") format(\"woff2\");\n}\n\n@font-face {\n  font-family: \"Manrope\";\n  font-style: normal;\n  font-weight: 500;\n  font-display: swap;\n  src: url(\"/lumina/assets/manrope-500-normal-BYYD-dBL.woff2\") format(\"woff2\");\n}\n\n@font-face {\n  font-family: \"Manrope\";\n  font-style: normal;\n  font-weight: 600;\n  font-display: swap;\n  src: url(\"/lumina/assets/manrope-600-normal-4f0koTD-.woff2\") format(\"woff2\");\n}\n\n@font-face {\n  font-family: \"Manrope\";\n  font-style: normal;\n  font-weight: 700;\n  font-display: swap;\n  src: url(\"/lumina/assets/manrope-700-normal-BZp_XxE4.woff2\") format(\"woff2\");\n}\n\n.font-sans {\n  font-family: var(--font-sans);\n}"
+    },
+    "variables": {
+      "serif": "--font-serif: \"Cormorant Garamond\", Georgia, serif;",
+      "sans": "--font-sans: \"Manrope\", system-ui, sans-serif;"
+    }
+  },
+  "preloads": [
+    {
+      "alias": "serif",
+      "family": "Cormorant Garamond",
+      "weight": 500,
+      "style": "normal",
+      "file": "assets/cormorant-garamond-500-normal-BsRWmXhO.woff2",
+      "as": "font",
+      "type": "font/woff2",
+      "crossorigin": "anonymous"
+    },
+    {
+      "alias": "sans",
+      "family": "Manrope",
+      "weight": 400,
+      "style": "normal",
+      "file": "assets/manrope-400-normal-PaqtzbVb.woff2",
+      "as": "font",
+      "type": "font/woff2",
+      "crossorigin": "anonymous"
+    },
+    {
+      "alias": "sans",
+      "family": "Manrope",
+      "weight": 600,
+      "style": "normal",
+      "file": "assets/manrope-600-normal-4f0koTD-.woff2",
+      "as": "font",
+      "type": "font/woff2",
+      "crossorigin": "anonymous"
+    }
+  ],
+  "families": {
+    "serif": {
+      "family": "Cormorant Garamond",
+      "variable": "--font-serif",
+      "fallbacks": [
+        "Georgia",
+        "serif"
+      ],
+      "variants": {
+        "500:normal": {
+          "files": [
+            {
+              "file": "assets/cormorant-garamond-500-normal-BsRWmXhO.woff2",
+              "format": "woff2"
+            }
+          ]
+        },
+        "500:italic": {
+          "files": [
+            {
+              "file": "assets/cormorant-garamond-500-italic-Y14P-dkT.woff2",
+              "format": "woff2"
+            }
+          ]
+        },
+        "600:normal": {
+          "files": [
+            {
+              "file": "assets/cormorant-garamond-600-normal-Co1r35X9.woff2",
+              "format": "woff2"
+            }
+          ]
+        },
+        "600:italic": {
+          "files": [
+            {
+              "file": "assets/cormorant-garamond-600-italic-DCuhXWyK.woff2",
+              "format": "woff2"
+            }
+          ]
+        }
+      }
+    },
+    "sans": {
+      "family": "Manrope",
+      "variable": "--font-sans",
+      "fallbacks": [
+        "system-ui",
+        "sans-serif"
+      ],
+      "variants": {
+        "400:normal": {
+          "files": [
+            {
+              "file": "assets/manrope-400-normal-PaqtzbVb.woff2",
+              "format": "woff2"
+            }
+          ]
+        },
+        "500:normal": {
+          "files": [
+            {
+              "file": "assets/manrope-500-normal-BYYD-dBL.woff2",
+              "format": "woff2"
+            }
+          ]
+        },
+        "600:normal": {
+          "files": [
+            {
+              "file": "assets/manrope-600-normal-4f0koTD-.woff2",
+              "format": "woff2"
+            }
+          ]
+        },
+        "700:normal": {
+          "files": [
+            {
+              "file": "assets/manrope-700-normal-BZp_XxE4.woff2",
+              "format": "woff2"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "name": "sunrice/starter-real-estate",
+    "description": "Lumina Estates, a bilingual real-estate site for Sunrice CMS: properties with filters, agents, neighbourhood guides, a journal, enquiry forms and its templates.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["laravel", "cms", "starter", "real-estate"],
+    "require": {
+        "php": "^8.4",
+        "illuminate/support": "^13.0",
+        "sunrice/admin": "^0.1 || dev-main",
+        "sunrice/cms": "^0.1 || dev-main",
+        "sunrice/starter-kit": "^0.1 || dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sunrice\\Starters\\RealEstate\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sunrice\\Starters\\RealEstate\\RealEstateServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

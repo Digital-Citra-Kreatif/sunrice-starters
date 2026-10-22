@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: tests, lint and analyse
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Sunrice itself (the panel, the CMS, the starter kit), as composer.json's path repository expects it.
+      # SUNRICE_REPO_TOKEN: a read-only token for Digital-Citra-Kreatif/sunrice while it's private.
+      - uses: actions/checkout@v4
+        with:
+          repository: Digital-Citra-Kreatif/sunrice
+          path: sunrice
+          token: ${{ secrets.SUNRICE_REPO_TOKEN || github.token }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, sqlite3, pdo_sqlite, gd, intl
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist
+      - name: Lint
+        run: composer lint
+      - name: Analyse
+        run: composer analyse
+      - name: Test
+        run: composer test

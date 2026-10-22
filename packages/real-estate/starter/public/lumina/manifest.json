@@ -1,0 +1,53 @@
+{
+  "_cormorant-garamond-500-italic-Y14P-dkT.woff2": {
+    "file": "assets/cormorant-garamond-500-italic-Y14P-dkT.woff2",
+    "src": "_cormorant-garamond-500-italic-Y14P-dkT.woff2"
+  },
+  "_cormorant-garamond-500-normal-BsRWmXhO.woff2": {
+    "file": "assets/cormorant-garamond-500-normal-BsRWmXhO.woff2",
+    "src": "_cormorant-garamond-500-normal-BsRWmXhO.woff2"
+  },
+  "_cormorant-garamond-600-italic-DCuhXWyK.woff2": {
+    "file": "assets/cormorant-garamond-600-italic-DCuhXWyK.woff2",
+    "src": "_cormorant-garamond-600-italic-DCuhXWyK.woff2"
+  },
+  "_cormorant-garamond-600-normal-Co1r35X9.woff2": {
+    "file": "assets/cormorant-garamond-600-normal-Co1r35X9.woff2",
+    "src": "_cormorant-garamond-600-normal-Co1r35X9.woff2"
+  },
+  "_fonts-CZg4KRw_.css": {
+    "file": "assets/fonts-CZg4KRw_.css",
+    "src": "_fonts-CZg4KRw_.css"
+  },
+  "_manrope-400-normal-PaqtzbVb.woff2": {
+    "file": "assets/manrope-400-normal-PaqtzbVb.woff2",
+    "src": "_manrope-400-normal-PaqtzbVb.woff2"
+  },
+  "_manrope-500-normal-BYYD-dBL.woff2": {
+    "file": "assets/manrope-500-normal-BYYD-dBL.woff2",
+    "src": "_manrope-500-normal-BYYD-dBL.woff2"
+  },
+  "_manrope-600-normal-4f0koTD-.woff2": {
+    "file": "assets/manrope-600-normal-4f0koTD-.woff2",
+    "src": "_manrope-600-normal-4f0koTD-.woff2"
+  },
+  "_manrope-700-normal-BZp_XxE4.woff2": {
+    "file": "assets/manrope-700-normal-BZp_XxE4.woff2",
+    "src": "_manrope-700-normal-BZp_XxE4.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-DFWa0mcL.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-CA95lfgd.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}

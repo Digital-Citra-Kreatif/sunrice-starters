@@ -1,0 +1,6 @@
+{
+    "name": "real-estate",
+    "title": "Lumina Estates (real estate)",
+    "description": "A bilingual real-estate agency: properties with filters, agents, neighbourhood guides, a journal and enquiry forms.",
+    "locales": ["en", "id"]
+}
