@@ -1,7 +1,7 @@
 {{--
     The site's layout. Pages @extends('cms.layout') and fill @section('content'); @push('head') adds to the <head>.
     Optional data from the page: $seoTitle (app pages and the search page), $seoSchema (JSON-LD nodes, see
-    cms/properties.blade.php), $seoAuthor (an article's author, see cms/journal.blade.php).
+    cms/collections/properties/show.blade.php), $seoAuthor (an article's author, see cms/collections/journal/show.blade.php).
 
     Reads the page shown from cms_page(), never from $entry or $term (a page's own loops would overwrite those).
     Everything visitors read comes from the CMS (menus "main", "footer", "legal"; globals "company", "social",

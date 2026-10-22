@@ -2,7 +2,7 @@
     The Contact page (Page settings → Template: cms.contact): the page's sections, the company's details from
     the "company" global and the "contact" form with our own markup.
 --}}
-@extends('cms.pages')
+@extends('cms.collections.pages.show')
 
 @section('before-sections')
     @php($company = cms_global('company'))

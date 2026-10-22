@@ -3,7 +3,7 @@
     printed by the CMS from the form's blueprint (no slot: labels, help texts, file input and errors come from
     the form itself).
 --}}
-@extends('cms.pages')
+@extends('cms.collections.pages.show')
 
 @section('after-sections')
     <section class="section bg-sand-50" id="valuation">
