@@ -1,6 +1,6 @@
 {{--
     Any entry of a collection without a template of its own (a new collection added in the CMS): its title and
-    its text, rich text and images, in the site's layout. Give the collection its own cms/{handle}.blade.php.
+    its text, rich text and images, in the site's layout. Give the collection its own cms/collections/{handle}/show.blade.php.
 --}}
 @extends('cms.layout')
 

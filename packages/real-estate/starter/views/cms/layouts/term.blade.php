@@ -1,4 +1,4 @@
-{{-- The term pages' base (@extends('cms.layouts.term', [...]) from cms/taxonomy-*.blade.php): header with the taxonomy's name, the term's intro, the entries as cards. --}}
+{{-- The term pages' base (@extends('cms.layouts.term', [...]) from cms/taxonomies/*/show.blade.php): header with the taxonomy's name, the term's intro, the entries as cards. --}}
 @extends('cms.layout')
 
 @section('content')

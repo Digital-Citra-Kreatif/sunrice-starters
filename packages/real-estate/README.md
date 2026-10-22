@@ -35,14 +35,14 @@ Then, in the admin: **Settings → Site**: choose the homepage (the page *Home*)
 
 | Collection | URL (Indonesian) | Template | Listing |
 | --- | --- | --- | --- |
-| `pages` (hierarchical) | `/{slug}`, the homepage at `/` | `cms/pages`; Contact `cms.contact`, Sell with us `cms.sell` | — |
-| `properties` | `/properties/{slug}` (`/id/properti/…`) | `cms/properties` | `/properties` with filters |
-| `agents` (ordered) | `/team/{slug}` (`/id/tim/…`) | `cms/agents` | `/team` |
-| `neighbourhoods` | `/neighbourhoods/{slug}` (`/id/kawasan/…`) | `cms/neighbourhoods` | `/neighbourhoods` |
-| `journal` (dated, comments) | `/journal/{slug}` (`/id/jurnal/…`) | `cms/journal` | `/journal`, 6 a page |
+| `pages` (hierarchical) | `/{slug}`, the homepage at `/` | `cms/collections/pages/show`; Contact `cms.contact`, Sell with us `cms.sell` (their Page settings) | — |
+| `properties` | `/properties/{slug}` (`/id/properti/…`) | `cms/collections/properties/show`, `…/index` | `/properties` with filters |
+| `agents` (ordered) | `/team/{slug}` (`/id/tim/…`) | `cms/collections/agents/show`, `…/index` | `/team` |
+| `neighbourhoods` | `/neighbourhoods/{slug}` (`/id/kawasan/…`) | `cms/collections/neighbourhoods/show`, `…/index` | `/neighbourhoods` |
+| `journal` (dated, comments) | `/journal/{slug}` (`/id/jurnal/…`) | `cms/collections/journal/show`, `…/index` | `/journal`, 6 a page |
 | `testimonials` (ordered) | none: shown by the Testimonials block | — | — |
 
-Term pages: `/property-type/{slug}`, `/location/{slug}` (with the places under it), `/journal/topic/{slug}`. Search `/search`; the sitemap `/sitemap.xml`.
+Term pages: `/property-type/{slug}`, `/location/{slug}` (with the places under it), `/journal/topic/{slug}`, with `cms/taxonomies/{taxonomy}/show` (`property_types`, `locations`, `topics`); any other entry `cms/collections/show`. Templates go by folder: see the CMS's [templates](https://github.com/Digital-Citra-Kreatif/sunrice/blob/main/packages/cms/docs/site.md#templates). Search `/search`; the sitemap `/sitemap.xml`.
 
 ### Adding a block type
 
