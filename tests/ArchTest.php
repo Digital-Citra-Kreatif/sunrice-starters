@@ -43,3 +43,15 @@ it('keeps templates off the app\'s own classes', function () {
 
     expect($offenders)->toBe([]);
 });
+
+it('ships the MIT license with every starter package', function () {
+    $root = dirname(__DIR__);
+    $license = (string) file_get_contents("{$root}/LICENSE");
+    $missing = array_values(array_filter(
+        glob("{$root}/packages/*", GLOB_ONLYDIR) ?: [],
+        fn (string $package) => ! is_file("{$package}/LICENSE") || file_get_contents("{$package}/LICENSE") !== $license,
+    ));
+
+    expect($license)->toStartWith("MIT License\n\nCopyright (c) 2026 Digital Citra Kreatif")
+        ->and(array_map('basename', $missing))->toBe([]);
+});
