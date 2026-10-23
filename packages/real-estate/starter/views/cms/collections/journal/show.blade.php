@@ -7,7 +7,7 @@
 @php
     $author = $values['author_agent'] ?? null;
     $authorValues = $author?->values() ?? [];
-    $topics = collect($values['topics'] ?? []);
+    $topics = $entry->termsOf('topics');
     $related = collect($values['related'] ?? []);
     // The BlogPosting's author in the structured data: the agent who wrote it, not the company (the layout passes it on).
     $seoAuthor = $author ? array_filter(['@type' => 'Person', 'name' => $author->title, 'url' => $author->url(), 'jobTitle' => $authorValues['role'] ?? null]) : null;

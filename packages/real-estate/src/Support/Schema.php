@@ -57,7 +57,9 @@ final class Schema
     {
         $images = $values['gallery'] ?? collect();
         $images = $images instanceof Collection ? $images : collect([$images]);
-        $location = $values['location'] ?? null;
+        // Its place and type are the entry's own terms (one each).
+        $location = $entry->termsOf('locations')->first();
+        $type = $entry->termsOf('property_types')->first();
         $agent = $values['agent'] ?? null;
         $status = $values['property_status'] ?? 'available';
 
@@ -70,7 +72,7 @@ final class Schema
             'datePosted' => $entry->published_at?->toAtomString(),
             'image' => $images->filter(fn ($m) => $m instanceof Media)->map(fn (Media $m) => $m->url('large'))->values()->all() ?: null,
             'about' => array_filter([
-                '@type' => self::accommodation($values['property_type'] ?? null),
+                '@type' => self::accommodation($type),
                 'numberOfRooms' => $values['bedrooms'] ?? null,
                 'numberOfBathroomsTotal' => $values['bathrooms'] ?? null,
                 'floorSize' => is_numeric($values['building_area'] ?? null) ? ['@type' => 'QuantitativeValue', 'value' => $values['building_area'], 'unitCode' => 'MTK'] : null,
@@ -78,7 +80,7 @@ final class Schema
                 'address' => array_filter([
                     '@type' => 'PostalAddress',
                     'streetAddress' => $values['address'] ?? null,
-                    'addressLocality' => $location instanceof Term ? $location->title() : null,
+                    'addressLocality' => $location?->title(),
                     'addressCountry' => 'ID',
                 ]),
             ], fn ($v) => $v !== null && $v !== []),
@@ -103,9 +105,9 @@ final class Schema
     }
 
     /** schema.org's type for what's on offer, from the property type's slug in the main language. */
-    private static function accommodation(mixed $type): string
+    private static function accommodation(?Term $type): string
     {
-        $slug = $type instanceof Term ? $type->translation(Locales::default())?->slug : null;
+        $slug = $type?->translation(Locales::default())?->slug;
 
         return match ($slug) {
             'apartment' => 'Apartment',

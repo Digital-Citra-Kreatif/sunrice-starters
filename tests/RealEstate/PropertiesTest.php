@@ -24,6 +24,14 @@ it('renders a property with its facts, price, status and agent', function (): vo
         ->assertSee('<meta name="description" content="A five-bedroom villa above the rice fields of Canggu.">', false);   // SEO from fields: summary
 });
 
+it('shows the listing type and place of each property on its card', function (): void {
+    $card = fn (string $html, string $title): string => (string) collect(explode('<article class="card">', $html))->first(fn (string $part): bool => str_contains($part, '>'.$title.'</a>'));
+    $html = (string) $this->get('/properties')->getContent();
+
+    expect($card($html, 'Villa Samudra'))->toContain('For sale')->toContain('Canggu')
+        ->and($card($html, 'Seminyak Pool Villa'))->toContain('For rent')->toContain('Seminyak');
+});
+
 it('formats rent with its suffix and Indonesian numbers', function (): void {
     $this->get('/properties/seminyak-pool-villa')->assertSee('IDR 95,000,000')->assertSee('/ month');
     $this->get('/id/properti/vila-samudra')->assertOk()->assertSee('Rp 28.500.000.000')->assertSee('Kolam infinity')->assertSee('Tersedia');
@@ -45,7 +53,10 @@ it('describes the property as a RealEstateListing with an Offer', function (): v
         ->and($listing['offers']['@type'])->toBe('Offer')
         ->and($listing['offers']['price'])->toEqual(28_500_000_000)
         ->and($listing['offers']['priceCurrency'])->toBe('IDR')
-        ->and($listing['about']['numberOfRooms'])->toBe(5);
+        ->and($listing['about']['numberOfRooms'])->toBe(5)
+        // From the entry's own terms: its type and its place.
+        ->and($listing['about']['@type'])->toBe('SingleFamilyResidence')
+        ->and($listing['about']['address']['addressLocality'])->toBe('Canggu');
 });
 
 it('shows properties nearby from the same area', function (): void {

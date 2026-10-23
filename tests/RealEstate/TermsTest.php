@@ -1,0 +1,66 @@
+<?php
+
+declare(strict_types=1);
+
+use Sunrice\Cms\Models\Blueprint;
+use Sunrice\Cms\Models\Collection;
+use Sunrice\Cms\Models\Entry;
+use Sunrice\Cms\Models\Taxonomy;
+use Sunrice\Cms\Models\Term;
+
+/*
+ * Entries get their terms from their collection's taxonomies (the editor's Taxonomies card), not from terms
+ * fields: the starter attaches them, one term only where a property has one, and gives its sample entries theirs.
+ */
+beforeEach(function (): void {
+    installStarter('real-estate');
+});
+
+it('attaches the taxonomies to their collections, one term only for a property\'s type, listing type and place', function (): void {
+    $single = fn (string $taxonomy, string $collection): mixed => Taxonomy::query()->where('handle', $taxonomy)->sole()
+        ->collections()->where('handle', $collection)->sole()->getRelation('pivot')->single;
+
+    expect($single('property_types', 'properties'))->toBeTrue()
+        ->and($single('listing_types', 'properties'))->toBeTrue()
+        ->and($single('locations', 'properties'))->toBeTrue()
+        ->and($single('amenities', 'properties'))->toBeFalse()
+        ->and($single('topics', 'journal'))->toBeFalse();
+});
+
+it('keeps no terms fields for the entries\' own terms in the blueprints', function (): void {
+    foreach (['post', 'property'] as $handle) {
+        $types = array_column(Blueprint::query()->where('handle', $handle)->sole()->fields, 'type');
+        expect($types)->not->toContain('terms');
+    }
+});
+
+it('gives the sample entries their terms', function (): void {
+    $slugs = function (string $collection, string $slug): array {
+        $entry = Entry::query()->whereHas('translations', fn ($q) => $q->where('slug', $slug))
+            ->where('collection_id', Collection::query()->where('handle', $collection)->sole()->id)->sole();
+
+        return $entry->terms->mapToGroups(fn (Term $t): array => [$t->taxonomy->handle => $t->translation('en')?->slug])->map->all()->all();
+    };
+
+    expect($slugs('properties', 'villa-arunika-pererenan'))->toEqual([
+        'property_types' => ['villa'],
+        'listing_types' => ['for-sale'],
+        'locations' => ['canggu'],
+        // In the taxonomy's order, as the editor lists them.
+        'amenities' => ['private-pool', 'garden', 'parking', 'rice-field-view', 'smart-home', 'staff-quarters'],
+    ])->and($slugs('journal', 'renting-a-family-home-in-south-jakarta-what-to-expect'))->toEqual(['topics' => ['buying-guides', 'living']]);
+});
+
+it('shows a sample property\'s and post\'s terms, linked to their pages', function (): void {
+    $term = fn (string $taxonomy, string $slug): Term => Term::query()->whereHas('taxonomy', fn ($q) => $q->where('handle', $taxonomy))
+        ->whereHas('translations', fn ($q) => $q->where('slug', $slug))->sole();
+
+    $this->get('/properties/villa-arunika-pererenan')->assertOk()
+        ->assertSee('For sale')
+        ->assertSee('href="'.$term('property_types', 'villa')->url().'"', false)
+        ->assertSee('href="'.$term('locations', 'canggu')->url().'"', false)
+        ->assertSee('Rice-field view');
+    $this->get('/journal/renting-a-family-home-in-south-jakarta-what-to-expect')->assertOk()
+        ->assertSeeInOrder([$term('topics', 'buying-guides')->url(), $term('topics', 'living')->url()], false);
+    $this->get('/properties?location=bali')->assertOk()->assertSee('Villa Arunika, Pererenan');
+});

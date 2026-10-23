@@ -5,14 +5,14 @@
 --}}
 @php
     $v = $property->values();
-    $location = $v['location'] ?? null;
-    $listing = $v['listing_type'] ?? null;
+    $location = $property->termsOf('locations')->first();
+    $listing = $property->termsOf('listing_types')->first();
 @endphp
 <article class="card">
     <div class="card-media">
         @include('cms.partials.image', ['media' => $v['gallery'] ?? null, 'size' => 'medium', 'sizes' => '(min-width: 64rem) 26rem, (min-width: 40rem) 50vw, 100vw', 'icon' => 'home'])
         <div class="absolute inset-x-3 top-3 z-[2] flex flex-wrap gap-2">
-            @if ($listing instanceof \Sunrice\Cms\Models\Term)
+            @if ($listing)
                 <span class="badge badge-glass">{{ $listing->title() }}</span>
             @endif
             @if (($v['property_status'] ?? 'available') !== 'available')
@@ -21,7 +21,7 @@
         </div>
     </div>
     <div class="card-body">
-        @if ($location instanceof \Sunrice\Cms\Models\Term)
+        @if ($location)
             <p class="flex items-center gap-1.5 text-xs font-semibold tracking-[0.14em] text-sand-600 uppercase">
                 @include('cms.partials.icon', ['name' => 'pin', 'class' => 'size-3.5'])
                 {{ $location->title() }}

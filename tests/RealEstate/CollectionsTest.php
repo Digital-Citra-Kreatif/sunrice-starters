@@ -39,6 +39,7 @@ it('paginates the journal six a page and lists its topics', function (): void {
 it('renders a post with its author, related properties and comments', function (): void {
     $this->get('/journal/market-report-7')->assertOk()
         ->assertSee('Ayu Pratiwi')
+        ->assertSee('<a href="'.$this->site->term('topics/market-reports')->url().'" class="text-teal-700 hover:underline">Market reports</a>', false)
         ->assertSee('Properties in this story')->assertSee('Villa Samudra')
         ->assertSee('id="comment-form"', false)
         ->assertSee('More from the journal');

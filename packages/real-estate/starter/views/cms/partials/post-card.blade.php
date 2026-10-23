@@ -1,7 +1,7 @@
 {{-- A journal post: cover, topics, date, title, excerpt. @include('cms.partials.post-card', ['post' => $translation]) --}}
 @php
     $v = $post->values();
-    $topics = $v['topics'] ?? collect();
+    $topic = $post->termsOf('topics')->first();
 @endphp
 <article class="card">
     <div class="card-media !aspect-[3/2]">
@@ -9,8 +9,8 @@
     </div>
     <div class="card-body">
         <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold tracking-[0.14em] uppercase">
-            @if ($topics instanceof \Illuminate\Support\Collection && $topics->isNotEmpty())
-                <span class="text-teal-700">{{ $topics->first()->title() }}</span>
+            @if ($topic)
+                <span class="text-teal-700">{{ $topic->title() }}</span>
             @endif
             @if ($post->published_at)
                 <time class="text-sand-600" datetime="{{ $post->published_at->toAtomString() }}">{{ $post->published_at->translatedFormat('j M Y') }}</time>

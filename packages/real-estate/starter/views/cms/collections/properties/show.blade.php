@@ -9,13 +9,13 @@
 @php
     $v = $values;
     $gallery = collect($v['gallery'] ?? [])->filter(fn ($m) => $m instanceof \Sunrice\Admin\Media\Media && $m->isImage())->values();
-    $location = $v['location'] ?? null;
-    $type = $v['property_type'] ?? null;
-    $listingType = $v['listing_type'] ?? null;
+    $location = $entry->termsOf('locations')->first();
+    $type = $entry->termsOf('property_types')->first();
+    $listingType = $entry->termsOf('listing_types')->first();
     $agent = $v['agent'] ?? null;
     $agentValues = $agent?->values() ?? [];
     $neighbourhood = $v['neighbourhood'] ?? null;
-    $amenities = collect($v['amenities'] ?? []);
+    $amenities = $entry->termsOf('amenities');
     $features = collect($v['features'] ?? [])->pluck('label')->filter();
     $status = $v['property_status'] ?? 'available';
     // Gone (sold or let): no asking price or viewing to offer, but similar homes.
