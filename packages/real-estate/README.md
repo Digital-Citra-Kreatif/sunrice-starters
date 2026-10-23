@@ -15,7 +15,7 @@ php artisan sunrice:starter real-estate --dry-run   # what it would do
 php artisan sunrice:starter real-estate             # structure, sample content, templates, assets, words
 ```
 
-Then, in the admin: **Settings → Site**: choose the homepage (the page *Home*) and the site's name. Photos aren't included: add them to the properties, agents and guides in the media library.
+It sets **Settings → Site** (the homepage, the page *Home*, and the site's name, Lumina Estates) and **Settings → SEO → Structured data** (the publisher, a `RealEstateAgent`, with an example telephone and address) where the site still has the defaults: put in the agency's own there. Photos aren't included: add them to the properties, agents and guides in the media library.
 
 `--no-content` installs the structure, templates and words without the sample properties, agents and posts.
 
@@ -29,7 +29,7 @@ Then, in the admin: **Settings → Site**: choose the homepage (the page *Home*)
 | Prices, statuses, photos (with alt texts), floor plans | The built CSS, script, fonts and icons (`public/lumina`); their sources in this package's `resources/` |
 | Menus (`main`, `footer`, `legal`), contact details (global `company`), social links (`social`), footer texts (`footer`) | Interface words: labels, buttons, headings of fixed sections, in `lang/en/site.php` and `lang/id/site.php` |
 | Forms (`contact`, `inquiry`, `valuation`, `newsletter`): fields, recipients, thank-you texts | Which form appears where (contact page, property pages, sell page, footer) |
-| SEO titles, descriptions, share images; redirects; site code | Structured data (this package's `Support\Schema`) |
+| SEO titles, descriptions, share images; redirects; site code; the publisher in structured data (**Settings → SEO → Structured data**: type, name, logo, telephone, address) | Structured data for properties, agents and FAQs (this package's `Support\Schema`) |
 
 ## The content model
 

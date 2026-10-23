@@ -65,9 +65,6 @@
                             @if ($location->parent)<span class="text-sand-400">·</span> <span>{{ $location->parent->title() }}</span>@endif
                         </p>
                     @endif
-                    @if ($fallback)
-                        @include('cms.partials.fallback-note')
-                    @endif
                 </div>
                 <div class="lg:text-right">
                     <p class="eyebrow">{{ $priceLabel }}</p>

@@ -21,8 +21,7 @@
             </div>
             <div class="lg:col-span-7 lg:pt-6">
                 @if (filled($values['role'] ?? null))<p class="eyebrow">{{ $values['role'] }}</p>@endif
-                <h1 class="h1 mt-3">{{ $title }}</h1>
-                @if ($fallback)@include('cms.partials.fallback-note')@endif
+                <h1 class="h1 mt-3"{{ cms_page()?->langAttribute() }}>{{ $title }}</h1>
                 <div class="mt-8 flex flex-wrap gap-3">
                     @if (filled($values['phone'] ?? null))
                         <a href="tel:{{ preg_replace('/[^0-9+]/', '', $values['phone']) }}" class="btn btn-primary">@include('cms.partials.icon', ['name' => 'phone']) {{ $values['phone'] }}</a>
@@ -38,7 +37,7 @@
                     <p class="mt-8 text-sm text-sand-700"><span class="font-semibold">{{ __('site.agent.languages') }}:</span> {{ $languages->map(fn ($l) => __('site.languages.'.strtolower($l)) !== 'site.languages.'.strtolower($l) ? __('site.languages.'.strtolower($l)) : $l)->implode(', ') }}</p>
                 @endif
                 @if (filled($values['bio'] ?? null))
-                    <div class="prose mt-8">{!! $values['bio'] !!}</div>
+                    <div class="prose mt-8"{{ cms_page()?->langAttribute() }}>{!! $values['bio'] !!}</div>
                 @endif
                 @if ($social->isNotEmpty())
                     <ul class="mt-8 flex gap-2" aria-label="{{ __('site.footer.social') }}">

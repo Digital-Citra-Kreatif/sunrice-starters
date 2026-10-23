@@ -7,7 +7,6 @@
         'eyebrow' => $eyebrow,
         'title' => $title,
         'intro' => $values['intro'] ?? ($values['description'] ?? null),
-        'fallback' => $fallback,
     ])
     @yield('term-extra')
     <section class="container-site pb-24">

@@ -17,16 +17,15 @@
         <div class="container-site w-full pt-40 pb-14 lg:pb-20">
             @include('cms.partials.breadcrumbs', ['items' => \Sunrice\Starters\RealEstate\Support\Breadcrumbs::forEntry($entry, $title), 'class' => 'mb-6 !text-white/70 [&_[aria-current]]:!text-white'])
             <p class="eyebrow !text-teal-100">{{ __('site.neighbourhoods.guide') }}</p>
-            <h1 class="display mt-3">{{ $title }}</h1>
-            @if ($fallback)<div class="text-ink">@include('cms.partials.fallback-note')</div>@endif
+            <h1 class="display mt-3"{{ cms_page()?->langAttribute() }}>{{ $title }}</h1>
         </div>
     </section>
 
     <section class="section">
         <div class="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div class="lg:col-span-8">
-                @if (filled($values['intro'] ?? null))<p class="lead font-serif !text-2xl !leading-relaxed text-ink">{{ $values['intro'] }}</p>@endif
-                @if (filled($values['body'] ?? null))<div class="prose mt-8">{!! $values['body'] !!}</div>@endif
+                @if (filled($values['intro'] ?? null))<p class="lead font-serif !text-2xl !leading-relaxed text-ink"{{ cms_page()?->langAttribute() }}>{{ $values['intro'] }}</p>@endif
+                @if (filled($values['body'] ?? null))<div class="prose mt-8"{{ cms_page()?->langAttribute() }}>{!! $values['body'] !!}</div>@endif
             </div>
             <aside class="lg:col-span-4">
                 @if (is_numeric($values['average_price'] ?? null))

@@ -26,9 +26,8 @@
                         <time class="text-sand-600" datetime="{{ $entry->published_at->toAtomString() }}">{{ $entry->published_at->translatedFormat('j F Y') }}</time>
                     @endif
                 </p>
-                <h1 class="h1 mt-5">{{ $title }}</h1>
-                @if (filled($values['excerpt'] ?? null))<p class="lead mx-auto mt-6 max-w-2xl">{{ $values['excerpt'] }}</p>@endif
-                @if ($fallback)@include('cms.partials.fallback-note')@endif
+                <h1 class="h1 mt-5"{{ cms_page()?->langAttribute() }}>{{ $title }}</h1>
+                @if (filled($values['excerpt'] ?? null))<p class="lead mx-auto mt-6 max-w-2xl"{{ cms_page()?->langAttribute() }}>{{ $values['excerpt'] }}</p>@endif
                 @if ($author)
                     <a href="{{ $author->url() }}" class="mt-8 inline-flex items-center gap-3 text-left">
                         <span class="size-12 overflow-hidden rounded-full">@include('cms.partials.image', ['media' => $authorValues['photo'] ?? null, 'size' => 'thumbnail', 'sizes' => '48px', 'class' => 'size-full object-cover', 'icon' => 'user', 'decorative' => true])</span>
@@ -49,7 +48,7 @@
 
         <div class="container-site py-14 lg:py-20">
             @if (filled($values['body'] ?? null))
-                <div class="prose mx-auto">{!! $values['body'] !!}</div>
+                <div class="prose mx-auto"{{ cms_page()?->langAttribute() }}>{!! $values['body'] !!}</div>
             @endif
 
             @if ($related->isNotEmpty())
