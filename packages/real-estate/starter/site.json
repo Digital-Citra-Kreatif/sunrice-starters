@@ -1251,7 +1251,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "In IDR",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 50
                 },
                 {
                     "type": "select",
@@ -1288,7 +1289,8 @@
                                 "per_month": "per bulan"
                             }
                         }
-                    }
+                    },
+                    "width": 25
                 },
                 {
                     "type": "select",
@@ -1330,7 +1332,8 @@
                                 "under_offer": "Dalam penawaran"
                             }
                         }
-                    }
+                    },
+                    "width": 25
                 },
                 {
                     "type": "number",
@@ -1344,7 +1347,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 25
                 },
                 {
                     "type": "number",
@@ -1358,7 +1362,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 25
                 },
                 {
                     "type": "number",
@@ -1371,7 +1376,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 25
                 },
                 {
                     "type": "number",
@@ -1384,7 +1390,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 25
                 },
                 {
                     "type": "number",
@@ -1399,7 +1406,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 25
                 },
                 {
                     "type": "text",
@@ -1410,7 +1418,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": true
+                    "translatable": true,
+                    "width": 75
                 },
                 {
                     "type": "link",
@@ -1503,7 +1512,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 50
                 },
                 {
                     "type": "entries",
@@ -1518,7 +1528,8 @@
                     "required": false,
                     "validation": [],
                     "instructions": "",
-                    "translatable": false
+                    "translatable": false,
+                    "width": 50
                 },
                 {
                     "type": "link",
@@ -3887,7 +3898,7 @@
                 },
                 "id": {
                     "title": "Villa Arunika, Pererenan",
-                    "slug": "villa-arunika-pererenan-id",
+                    "slug": "vila-arunika-pererenan",
                     "data": {
                         "seo": {
                             "image": null,
@@ -6242,5 +6253,16 @@
                 }
             }
         }
-    ]
+    ],
+    "settings": {
+        "site": {
+            "homepage": {
+                "entry": "pages/home"
+            },
+            "name": "Lumina Estates",
+            "publisherType": "RealEstateAgent",
+            "telephone": "+62 21 555 0100",
+            "address": "Jl. Contoh Raya No. 1\nJakarta Selatan 12345\nIndonesia"
+        }
+    }
 }

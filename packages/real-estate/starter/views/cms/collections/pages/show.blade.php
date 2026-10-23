@@ -18,12 +18,7 @@
             'crumbs' => cms_page()?->home ? [] : \Sunrice\Starters\RealEstate\Support\Breadcrumbs::forEntry($entry, $title),
             'title' => $title,
             'intro' => $values['intro'] ?? null,
-            'fallback' => $fallback,
         ])
-    @else
-        @if ($fallback)
-            <div class="container-site pt-28">@include('cms.partials.fallback-note')</div>
-        @endif
     @endunless
 
     @yield('before-sections')

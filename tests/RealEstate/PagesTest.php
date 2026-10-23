@@ -73,9 +73,9 @@ it('serves the Indonesian homepage and globals in Indonesian', function (): void
         ->assertSee('Langsung ke konten');     // lang/id/site.php
 });
 
-it('shows the main language with a note on untranslated pages', function (): void {
+it('shows the main language on untranslated pages, with no note', function (): void {
     $this->get('/id/about')->assertOk()
-        ->assertSee('belum tersedia dalam Bahasa Indonesia')
+        ->assertDontSee('role="note"', false)
         ->assertSee('<link rel="canonical" href="'.url('/about').'">', false);
 });
 

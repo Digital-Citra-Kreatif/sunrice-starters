@@ -13,7 +13,6 @@ return [
     'read_more' => 'Selengkapnya',
     'empty' => 'Belum ada apa pun di sini.',
     'results' => 'Hasil',
-    'fallback' => 'Halaman ini belum tersedia dalam Bahasa Indonesia, jadi ditampilkan dalam bahasa aslinya.',
     'rating' => 'Nilai :rating dari 5',
 
     'nav' => [

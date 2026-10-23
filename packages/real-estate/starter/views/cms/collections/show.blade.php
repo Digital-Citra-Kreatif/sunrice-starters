@@ -5,7 +5,7 @@
 @extends('cms.layout')
 
 @section('content')
-    @include('cms.partials.page-header', ['crumbs' => \Sunrice\Starters\RealEstate\Support\Breadcrumbs::forEntry($entry, $title), 'title' => $title, 'fallback' => $fallback])
+    @include('cms.partials.page-header', ['crumbs' => \Sunrice\Starters\RealEstate\Support\Breadcrumbs::forEntry($entry, $title), 'title' => $title])
     <div class="container-site pb-24">
         <div class="prose"{{ cms_page()?->langAttribute() }}>
             @foreach ($values as $handle => $value)

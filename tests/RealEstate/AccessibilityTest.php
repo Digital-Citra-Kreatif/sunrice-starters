@@ -43,3 +43,16 @@ it('keeps a submit button on the property filters, which keyboard users submit w
         ->assertSee('data-autosubmit', false)
         ->assertSee('<button type="submit" class="btn btn-primary">', false);
 });
+
+it('marks the main language\'s title and text on untranslated agents, posts and guides', function (string $path, string $id, string $h1, string $prose): void {
+    $this->get($id)->assertOk()
+        ->assertSee('<html lang="id">', false)
+        ->assertSee(str_replace('>', ' lang="en">', $h1), false)
+        ->assertSee(str_replace('>', ' lang="en">', $prose), false);
+    // In their own language: nothing to mark.
+    $this->get($path)->assertOk()->assertSee($h1, false)->assertSee($prose, false);
+})->with([
+    'agent' => ['/team/ayu-pratiwi', '/id/tim/ayu-pratiwi', '<h1 class="h1 mt-3">', '<div class="prose mt-8">'],
+    'post' => ['/journal/market-report-7', '/id/jurnal/market-report-7', '<h1 class="h1 mt-5">', '<div class="prose mx-auto">'],
+    'guide' => ['/neighbourhoods/canggu', '/id/kawasan/canggu', '<h1 class="display mt-3">', '<div class="prose mt-8">'],
+]);
