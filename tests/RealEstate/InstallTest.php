@@ -28,6 +28,16 @@ it('sets the homepage, the site\'s name and the publisher', function (): void {
     $this->get('/id')->assertOk()->assertSee('<html lang="id">', false);
 });
 
+it('gives the company global the publisher\'s made-up telephone and address', function (): void {
+    $settings = app(SiteSettings::class);
+    $company = cms_global('company', 'en');
+
+    expect($company['phone'])->toBe($settings->telephone)
+        ->and($company['address'])->toBe($settings->address)
+        ->and($settings->telephone)->toContain(' 555 ')
+        ->and($settings->address)->toContain('Contoh');
+});
+
 it('gives every Indonesian property an Indonesian address', function (): void {
     $this->get('/id/properti/vila-arunika-pererenan')->assertOk();
     expect(EntryTranslation::query()->where('locale', 'id')->where('slug', 'like', '%-id')->pluck('slug')->all())->toBe([]);

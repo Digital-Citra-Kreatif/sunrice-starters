@@ -148,7 +148,7 @@ final class LuminaSite
     {
         $company = GlobalSet::query()->where('handle', 'company')->first();
         if ($company !== null) {
-            app(SaveGlobals::class)->handle($company, ['legal_name' => 'PT Lumina Estates Indonesia', 'tagline' => 'Homes with light', 'phone' => '+62 21 555 0100', 'whatsapp' => '+62 811 555 0100', 'email' => 'hello@lumina-estates.test', 'address' => "Jl. Kemang Raya 8\nJakarta 12730", 'office_hours' => 'Mon–Sat 9:00–18:00'], 'en');
+            app(SaveGlobals::class)->handle($company, ['legal_name' => 'PT Lumina Estates Indonesia', 'tagline' => 'Homes with light', 'phone' => '+62 21 555 0100', 'whatsapp' => '+62 811 555 0100', 'email' => 'hello@lumina-estates.test', 'address' => "Jl. Contoh Raya No. 1\nJakarta Selatan 12345", 'office_hours' => 'Mon–Sat 9:00–18:00'], 'en');
             app(SaveGlobals::class)->handle($company, ['tagline' => 'Rumah penuh cahaya', 'office_hours' => 'Sen–Sab 9.00–18.00'], 'id');
         }
         $footer = GlobalSet::query()->where('handle', 'footer')->first();

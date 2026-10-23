@@ -2225,34 +2225,34 @@
             "values": {
                 "en": {
                     "map": {
-                        "url": "https://maps.google.com/?q=Jl.%20Kemang%20Raya%208%20Jakarta",
+                        "url": "https://maps.google.com/?q=Jakarta%20Selatan",
                         "type": "url",
                         "label": null,
                         "new_tab": false
                     },
                     "email": "hello@lumina-estates.test",
-                    "phone": "+62 21 7199 4400",
-                    "address": "Jl. Kemang Raya No. 8\nBangka, Mampang Prapatan\nJakarta Selatan 12730\nIndonesia",
+                    "phone": "+62 21 555 0100",
+                    "address": "Jl. Contoh Raya No. 1\nJakarta Selatan 12345\nIndonesia",
                     "tagline": "Homes of quiet distinction",
-                    "whatsapp": "+62 811 1900 4400",
+                    "whatsapp": "+62 811 555 0100",
                     "legal_name": "PT Lumina Estates Indonesia",
                     "office_hours": "Monday to Friday: 9:00–18:00\nSaturday: 10:00–15:00\nSunday and public holidays: by appointment",
                     "primary_contact": {
                         "name": "Anindya Wirawan",
                         "role": "Principal",
                         "email": "anindya@lumina-estates.test",
-                        "phone": "+62 21 7199 4400"
+                        "phone": "+62 21 555 0100"
                     }
                 },
                 "id": {
-                    "address": "Jl. Kemang Raya No. 8\nBangka, Mampang Prapatan\nJakarta Selatan 12730\nIndonesia",
+                    "address": "Jl. Contoh Raya No. 1\nJakarta Selatan 12345\nIndonesia",
                     "tagline": "Hunian dengan keanggunan yang tenang",
                     "office_hours": "Senin–Jumat: 09.00–18.00\nSabtu: 10.00–15.00\nMinggu dan hari libur: dengan perjanjian",
                     "primary_contact": {
                         "name": "Anindya Wirawan",
                         "role": "Prinsipal",
                         "email": "anindya@lumina-estates.test",
-                        "phone": "+62 21 7199 4400"
+                        "phone": "+62 21 555 0100"
                     }
                 }
             }
@@ -3262,7 +3262,7 @@
                         "seo": null,
                         "role": "Principal & Head of Sales, Jakarta",
                         "email": "anindya@lumina-estates.test",
-                        "phone": "+62 21 7199 4400",
+                        "phone": "+62 21 555 0100",
                         "photo": null,
                         "social": [
                             {
@@ -3278,7 +3278,7 @@
                                 "network": "linkedin"
                             }
                         ],
-                        "whatsapp": "+62 811 1900 4400",
+                        "whatsapp": "+62 811 555 0100",
                         "languages": [
                             "english",
                             "indonesian",
@@ -3303,7 +3303,7 @@
                         "seo": null,
                         "role": "Leasing Director, Jakarta",
                         "email": "sekar@lumina-estates.test",
-                        "phone": "+62 21 7199 4412",
+                        "phone": "+62 21 555 0112",
                         "photo": null,
                         "social": [
                             {
@@ -3319,7 +3319,7 @@
                                 "network": "linkedin"
                             }
                         ],
-                        "whatsapp": "+62 811 1900 4412",
+                        "whatsapp": "+62 811 555 0112",
                         "languages": [
                             "english",
                             "indonesian"
@@ -3343,7 +3343,7 @@
                         "seo": null,
                         "role": "Senior Partner, Villas & Land (Bali)",
                         "email": "rafael@lumina-estates.test",
-                        "phone": "+62 361 473 2210",
+                        "phone": "+62 361 555 0110",
                         "photo": null,
                         "social": [
                             {
@@ -3371,7 +3371,7 @@
                                 "network": "linkedin"
                             }
                         ],
-                        "whatsapp": "+62 812 3800 2210",
+                        "whatsapp": "+62 812 555 0110",
                         "languages": [
                             "english",
                             "indonesian",
@@ -3396,7 +3396,7 @@
                         "seo": null,
                         "role": "Client Advisor, International Buyers",
                         "email": "maarten@lumina-estates.test",
-                        "phone": "+62 361 473 2235",
+                        "phone": "+62 361 555 0135",
                         "photo": null,
                         "social": [
                             {
@@ -3424,7 +3424,7 @@
                                 "network": "instagram"
                             }
                         ],
-                        "whatsapp": "+62 812 3800 2235",
+                        "whatsapp": "+62 812 555 0135",
                         "languages": [
                             "english",
                             "indonesian",
@@ -6107,7 +6107,7 @@
                                 "type": "rich_text",
                                 "hidden": false,
                                 "values": {
-                                    "body": "<h2>Our offices</h2><p><strong>Jakarta</strong>: Jl. Kemang Raya No. 8, Bangka, Mampang Prapatan, Jakarta Selatan 12730</p><p><strong>Bali</strong>: Jl. Pantai Berawa No. 12, Tibubeneng, Kuta Utara, Badung 80361</p><p>Monday to Friday 9:00–18:00, Saturday 10:00–15:00.</p>"
+                                    "body": "<h2>Our offices</h2><p><strong>Jakarta</strong>: Jl. Contoh Raya No. 1, Jakarta Selatan 12345</p><p><strong>Bali</strong>: Jl. Contoh Pantai No. 2, Badung, Bali 80361</p><p>Monday to Friday 9:00–18:00, Saturday 10:00–15:00.</p>"
                                 }
                             }
                         ]
@@ -6127,7 +6127,7 @@
                                 "type": "rich_text",
                                 "hidden": false,
                                 "values": {
-                                    "body": "<h2>Kantor kami</h2><p><strong>Jakarta</strong>: Jl. Kemang Raya No. 8, Bangka, Mampang Prapatan, Jakarta Selatan 12730</p><p><strong>Bali</strong>: Jl. Pantai Berawa No. 12, Tibubeneng, Kuta Utara, Badung 80361</p><p>Senin sampai Jumat 09.00–18.00, Sabtu 10.00–15.00.</p>"
+                                    "body": "<h2>Kantor kami</h2><p><strong>Jakarta</strong>: Jl. Contoh Raya No. 1, Jakarta Selatan 12345</p><p><strong>Bali</strong>: Jl. Contoh Pantai No. 2, Badung, Bali 80361</p><p>Senin sampai Jumat 09.00–18.00, Sabtu 10.00–15.00.</p>"
                                 }
                             }
                         ]
