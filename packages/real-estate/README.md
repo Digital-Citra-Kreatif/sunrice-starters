@@ -42,6 +42,16 @@ Then, in the admin: **Settings → Site**: choose the homepage (the page *Home*)
 | `journal` (dated, comments) | `/journal/{slug}` (`/id/jurnal/…`) | `cms/collections/journal/show`, `…/index` | `/journal`, 6 a page |
 | `testimonials` (ordered) | none: shown by the Testimonials block | — | — |
 
+| Taxonomy | Attached to | Terms per entry |
+| --- | --- | --- |
+| `property_types` | `properties` | one |
+| `listing_types` (for sale, for rent) | `properties` | one |
+| `locations` (hierarchical: Bali › Badung › Canggu) | `properties` | one |
+| `amenities` | `properties` | several |
+| `topics` | `journal` | several |
+
+An entry's terms are its own, chosen in the editor's **Taxonomies** card (one term only where the attachment says so), not blueprint fields; templates read them with `$entry->termsOf('locations')` (see the CMS's [taxonomies](https://github.com/Digital-Citra-Kreatif/sunrice/blob/main/packages/cms/docs/taxonomies.md#giving-entries-terms)), and the property filters, term pages and "nearby" lists find entries by them.
+
 Term pages: `/property-type/{slug}`, `/location/{slug}` (with the places under it), `/journal/topic/{slug}`, with `cms/taxonomies/{taxonomy}/show` (`property_types`, `locations`, `topics`); any other entry `cms/collections/show`. Templates go by folder: see the CMS's [templates](https://github.com/Digital-Citra-Kreatif/sunrice/blob/main/packages/cms/docs/site.md#templates). Search `/search`; the sitemap `/sitemap.xml`.
 
 ### Adding a block type

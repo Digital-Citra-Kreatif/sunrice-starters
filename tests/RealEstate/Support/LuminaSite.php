@@ -91,22 +91,15 @@ final class LuminaSite
             'description' => '<p>Designed by a Balinese studio, open to the garden.</p>',
             'features' => [['label' => 'Infinity pool'], ['label' => 'Yoga pavilion']],
             'agent' => $ayu->entry_id, 'neighbourhood' => $canggu->entry_id, 'featured' => true,
-            'property_type' => $this->terms['property_types/villa']->id, 'listing_type' => $this->terms['listing_types/for-sale']->id,
-            'location' => $this->terms['locations/canggu']->id,
-            'amenities' => [$this->terms['amenities/private-pool']->id, $this->terms['amenities/garden']->id],
-        ]);
+        ], terms: ['property_types' => 'villa', 'listing_types' => 'for-sale', 'locations' => 'canggu', 'amenities' => ['private-pool', 'garden']]);
         $this->addEntry('properties', 'Seminyak Pool Villa', [
             'summary' => 'A walled pool villa, five minutes from the beach.', 'price' => 95_000_000, 'price_suffix' => 'per_month', 'property_status' => 'available',
             'bedrooms' => 3, 'bathrooms' => 3, 'building_area' => 280, 'agent' => $budi->entry_id, 'featured' => true,
-            'property_type' => $this->terms['property_types/villa']->id, 'listing_type' => $this->terms['listing_types/for-rent']->id,
-            'location' => $this->terms['locations/seminyak']->id,
-        ]);
+        ], terms: ['property_types' => 'villa', 'listing_types' => 'for-rent', 'locations' => 'seminyak']);
         $this->addEntry('properties', 'Kemang Garden House', [
             'summary' => 'A family house with a mature garden in Kemang.', 'price' => 14_200_000_000, 'price_suffix' => 'none', 'property_status' => 'under_offer',
             'bedrooms' => 4, 'bathrooms' => 4, 'building_area' => 450, 'land_area' => 600, 'agent' => $ayu->entry_id,
-            'property_type' => $this->terms['property_types/house']->id, 'listing_type' => $this->terms['listing_types/for-sale']->id,
-            'location' => $this->terms['locations/kemang']->id,
-        ]);
+        ], terms: ['property_types' => 'house', 'listing_types' => 'for-sale', 'locations' => 'kemang']);
         $this->translate('properties/villa-samudra', 'Vila Samudra', 'vila-samudra', ['summary' => 'Vila lima kamar di atas sawah Canggu.', 'description' => '<p>Dirancang oleh studio Bali.</p>', 'features' => [['label' => 'Kolam infinity']], 'address' => 'Jalan Pantai Berawa, Canggu']);
 
         $testimonial = $this->addEntry('testimonials', 'Sarah & Tom', ['quote' => 'They found us a home we didn’t know existed.', 'client' => 'Sarah & Tom Whitfield', 'client_role' => 'Bought in Canggu', 'rating' => 5]);
@@ -114,9 +107,9 @@ final class LuminaSite
         foreach (range(1, 7) as $n) {
             $this->addEntry('journal', "Market report {$n}", [
                 'excerpt' => "What moved Bali’s market, part {$n}.", 'body' => '<p>Prices held steady.</p>',
-                'author_agent' => $ayu->entry_id, 'topics' => [$this->terms['topics/market-reports']->id],
+                'author_agent' => $ayu->entry_id,
                 'related' => $n === 7 ? [$this->entries['properties/villa-samudra']->entry_id] : [],
-            ], publishedAt: now()->subDays(10 - $n));
+            ], publishedAt: now()->subDays(10 - $n), terms: ['topics' => ['market-reports']]);
         }
 
         $home = $this->addEntry('pages', 'Home', [
@@ -203,11 +196,14 @@ final class LuminaSite
         app(SaveTerm::class)->handle($term->taxonomy, ['title' => $title, 'slug' => $slug, 'locale' => 'id'], $term);
     }
 
-    /** @param  array<string, mixed>  $data */
-    private function addEntry(string $collection, string $title, array $data, ?int $parent = null, mixed $publishedAt = null): EntryTranslation
+    /**
+     * @param  array<string, mixed>  $data
+     * @param  array<string, string|list<string>>  $terms  the entry's own terms, by taxonomy, as slugs
+     */
+    private function addEntry(string $collection, string $title, array $data, ?int $parent = null, mixed $publishedAt = null, array $terms = []): EntryTranslation
     {
         $model = Collection::query()->where('handle', $collection)->sole();
-        $translation = app(CreateEntry::class)->handle($model, ['title' => $title, 'data' => $data]);
+        $translation = app(CreateEntry::class)->handle($model, ['title' => $title, 'data' => $data, 'terms' => $terms]);
         if ($parent !== null) {
             app(SaveEntrySettings::class)->handle($translation->entry, ['parent_id' => $parent]);
         }

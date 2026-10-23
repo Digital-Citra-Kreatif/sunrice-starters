@@ -14,7 +14,7 @@
         'q' => ['type' => 'search', 'label' => __('site.filter.search')],
         'listing_type' => ['type' => 'terms', 'taxonomy' => 'listing_types', 'multiple' => false, 'label' => __('site.filter.listing')],
         'property_type' => ['type' => 'terms', 'taxonomy' => 'property_types', 'multiple' => false, 'hide_empty' => true, 'label' => __('site.filter.type')],
-        'location' => ['type' => 'terms', 'taxonomy' => 'locations', 'field' => 'location', 'multiple' => false, 'label' => __('site.filter.location')],
+        'location' => ['type' => 'terms', 'taxonomy' => 'locations', 'multiple' => false, 'label' => __('site.filter.location')],
         // The steps the selects below offer: only they are kept by the page cache (any other number still filters).
         'bedrooms' => ['type' => 'range', 'label' => __('site.filter.bedrooms'), 'options' => $bedroomSteps],
         'price' => ['type' => 'range', 'label' => __('site.filter.price'), 'options' => $priceSteps],
