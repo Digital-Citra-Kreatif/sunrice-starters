@@ -85,7 +85,7 @@ it('links a property\'s type and place to their term pages, in each language', f
         ->assertSee('href="'.url('/property-type/villa').'"', false)
         ->assertSee('href="'.url('/location/canggu').'"', false);
 
-    $this->get('/id/properti/villa-arunika-pererenan-id')->assertOk()
+    $this->get('/id/properti/vila-arunika-pererenan')->assertOk()
         ->assertSee('href="'.url('/id/tipe-properti/'), false)
         ->assertSee('href="'.url('/id/lokasi/'), false)
         ->assertDontSee('/id/properties/', false);
