@@ -73,9 +73,9 @@ it('serves the Indonesian homepage and globals in Indonesian', function (): void
         ->assertSee('Langsung ke konten');     // lang/id/site.php
 });
 
-it('shows the main language with a note on untranslated pages', function (): void {
+it('shows the main language on untranslated pages, with no note', function (): void {
     $this->get('/id/about')->assertOk()
-        ->assertSee('belum tersedia dalam Bahasa Indonesia')
+        ->assertDontSee('role="note"', false)
         ->assertSee('<link rel="canonical" href="'.url('/about').'">', false);
 });
 
@@ -97,7 +97,7 @@ it('renders the contact page with the company details and the contact form', fun
         ->assertSee('Send us a message')
         ->assertSee('name="data[topic]"', false)
         ->assertSee('<option value="buying"', false)
-        ->assertSee('Jl. Kemang Raya 8');
+        ->assertSee('Jl. Contoh Raya No. 1');
 });
 
 it('renders the sell page with the CMS-printed valuation form, file input included', function (): void {

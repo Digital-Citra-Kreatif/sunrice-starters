@@ -1,16 +1,17 @@
 {{--
-    The page shown in each language it's on (cms_locale_urls(): untranslated pages too, with the main-language
-    fallback). hreflang and lang on each link tell search engines and screen readers which language it is.
+    The page shown in each language, from the CMS's <x-sunrice-cms::language-switcher> (Cms::localeUrls(), no
+    queries of its own), as Lumina's EN/ID pills. A language the page isn't in at all (the main-language fallback
+    off) links to that language's homepage (missing="home", the default), so the switcher never disappears.
+    hreflang and lang on each link tell search engines and screen readers which language it is; aria-current
+    marks the one shown.
 --}}
-@php($languages = cms_locale_urls())
-@if (count($languages) > 1)
+<x-sunrice-cms::language-switcher>
     <nav class="lang-switch" aria-label="{{ __('site.nav.languages') }}">
-        @foreach ($languages as $code => $href)
-            @php($tag = str_replace('_', '-', $code))
-            <a href="{{ $href }}" hreflang="{{ $tag }}" lang="{{ $tag }}" @if ($code === app()->getLocale()) aria-current="true" @endif>
-                <span aria-hidden="true">{{ strtoupper($code) }}</span>
-                <span class="visually-hidden">{{ \Sunrice\Cms\Support\Locales::name($code) }}</span>
+        @foreach ($component->languages as $language)
+            <a href="{{ $language->url }}" hreflang="{{ $language->tag }}" lang="{{ $language->tag }}"{!! ($language->current ? ' aria-current="true"' : '').($language->fallback ? ' data-fallback' : '').($language->home ? ' data-home' : '') !!}>
+                <span aria-hidden="true">{{ mb_strtoupper($language->tag) }}</span>
+                <span class="visually-hidden">{{ $language->name }}</span>
             </a>
         @endforeach
     </nav>
-@endif
+</x-sunrice-cms::language-switcher>
