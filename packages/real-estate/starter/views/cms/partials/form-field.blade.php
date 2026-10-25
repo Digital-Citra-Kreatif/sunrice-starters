@@ -2,25 +2,29 @@
     One input inside an <x-sunrice-cms::form> slot, with its label (lang/{locale}/site.php: forms.fields.{handle}),
     old input and error from the form component. Select options come from the form's blueprint; their labels
     from forms.options.{handle}.{value} when translated.
-    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'email', 'type' => 'email', 'required' => true])
+    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'email', 'inputType' => 'email', 'inputRequired' => true])
+    Options (all optional): inputType (text, email, tel, date, select, textarea), inputRequired, inputAutocomplete,
+    inputLabel, inputClass, inputRows, inputDefault. They're named input* because an @include sees the including
+    view's variables too: a page's own $type or $class must not reach the field.
 --}}
 @php
     $inputId = 'form-'.$form->form->handle.'-'.$handle;
     $error = $form->error($handle);
-    $value = $form->old($handle, $default ?? null);
-    $type ??= 'text';
+    $value = $form->old($handle, $inputDefault ?? null);
+    $inputType = is_string($inputType ?? null) ? $inputType : 'text';
     $labelKey = 'site.forms.fields.'.$handle;
-    $label = $label ?? (__($labelKey) !== $labelKey ? __($labelKey) : \Illuminate\Support\Str::headline($handle));
-    $field = in_array($type, ['select', 'date'], true) ? collect($form->form->schema()->fields())->firstWhere('handle', $handle) : null;
+    $label = $inputLabel ?? (__($labelKey) !== $labelKey ? __($labelKey) : \Illuminate\Support\Str::headline($handle));
+    $required = (bool) ($inputRequired ?? false);
+    $field = in_array($inputType, ['select', 'date'], true) ? collect($form->form->schema()->fields())->firstWhere('handle', $handle) : null;
     // A date field set to "future only" in the blueprint: the browser offers today onwards.
-    $min = $type === 'date' && ($field?->config['future'] ?? false) === true ? now()->toDateString() : null;
+    $min = $inputType === 'date' && ($field?->config['future'] ?? false) === true ? now()->toDateString() : null;
 @endphp
-<div class="field {{ $class ?? '' }}">
-    <label for="{{ $inputId }}">{{ $label }}@if ($required ?? false) <span aria-hidden="true" class="text-teal-700">*</span>@endif</label>
-    @if ($type === 'textarea')
-        <textarea id="{{ $inputId }}" name="data[{{ $handle }}]" rows="{{ $rows ?? 5 }}" @required($required ?? false) @if ($error) aria-invalid="true" aria-describedby="{{ $inputId }}-error" @endif>{{ is_scalar($value) ? $value : '' }}</textarea>
-    @elseif ($type === 'select')
-        <select id="{{ $inputId }}" name="data[{{ $handle }}]" @required($required ?? false) @if ($error) aria-invalid="true" aria-describedby="{{ $inputId }}-error" @endif>
+<div class="field {{ $inputClass ?? '' }}">
+    <label for="{{ $inputId }}">{{ $label }}@if ($required) <span aria-hidden="true" class="text-teal-700">*</span>@endif</label>
+    @if ($inputType === 'textarea')
+        <textarea id="{{ $inputId }}" name="data[{{ $handle }}]" rows="{{ $inputRows ?? 5 }}" @required($required) @if ($error) aria-invalid="true" aria-describedby="{{ $inputId }}-error" @endif>{{ is_scalar($value) ? $value : '' }}</textarea>
+    @elseif ($inputType === 'select')
+        <select id="{{ $inputId }}" name="data[{{ $handle }}]" @required($required) @if ($error) aria-invalid="true" aria-describedby="{{ $inputId }}-error" @endif>
             <option value="">{{ __('site.forms.choose') }}</option>
             @foreach (($field?->config['options'] ?? []) as $option)
                 @php($optionKey = 'site.forms.options.'.$handle.'.'.$option['value'])
@@ -28,8 +32,8 @@
             @endforeach
         </select>
     @else
-        <input id="{{ $inputId }}" type="{{ $type }}" name="data[{{ $handle }}]" value="{{ is_scalar($value) ? $value : '' }}" @required($required ?? false)
-            @if ($autocomplete ?? null) autocomplete="{{ $autocomplete }}" @endif
+        <input id="{{ $inputId }}" type="{{ $inputType }}" name="data[{{ $handle }}]" value="{{ is_scalar($value) ? $value : '' }}" @required($required)
+            @if ($inputAutocomplete ?? null) autocomplete="{{ $inputAutocomplete }}" @endif
             @if ($min) min="{{ $min }}" @endif
             @if ($error) aria-invalid="true" aria-describedby="{{ $inputId }}-error" @endif>
     @endif

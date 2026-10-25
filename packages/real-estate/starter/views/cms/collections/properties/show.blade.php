@@ -10,7 +10,7 @@
     $v = $values;
     $gallery = collect($v['gallery'] ?? [])->filter(fn ($m) => $m instanceof \Sunrice\Admin\Media\Media && $m->isImage())->values();
     $location = $entry->termsOf('locations')->first();
-    $type = $entry->termsOf('property_types')->first();
+    $propertyType = $entry->termsOf('property_types')->first();
     $listingType = $entry->termsOf('listing_types')->first();
     $agent = $v['agent'] ?? null;
     $agentValues = $agent?->values() ?? [];
@@ -42,7 +42,7 @@
         'building_area' => filled($v['building_area'] ?? null) ? __('site.facts.sqm', ['value' => number_format((float) $v['building_area'], 0, '', __('site.number.thousands'))]) : null,
         'land_area' => filled($v['land_area'] ?? null) ? __('site.facts.sqm', ['value' => number_format((float) $v['land_area'], 0, '', __('site.number.thousands'))]) : null,
         'year_built' => $v['year_built'] ?? null,
-        'property_type' => $type?->title(),
+        'property_type' => $propertyType?->title(),
     ], fn ($value) => filled($value));
 @endphp
 
@@ -55,7 +55,7 @@
                     <div class="flex flex-wrap items-center gap-2">
                         @include('cms.partials.status-badge', ['status' => $status])
                         @if ($listingType)<span class="badge badge-soft">{{ $listingType->title() }}</span>@endif
-                        @if ($type)<a href="{{ $type->url() }}" class="badge badge-soft transition hover:bg-sand-200">{{ $type->title() }}</a>@endif
+                        @if ($propertyType)<a href="{{ $propertyType->url() }}" class="badge badge-soft transition hover:bg-sand-200">{{ $propertyType->title() }}</a>@endif
                     </div>
                     <h1 class="h1 mt-5"{{ cms_page()?->langAttribute() }}>{{ $title }}</h1>
                     @if ($location)
@@ -211,11 +211,11 @@
                         <x-sunrice-cms::form handle="inquiry" class="mt-6 grid gap-4" replace>
                             <input type="hidden" name="data[property]" value="{{ $title }}">
                             @include('cms.partials.form-errors', ['form' => $component])
-                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'name', 'required' => true, 'autocomplete' => 'name'])
-                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'email', 'type' => 'email', 'required' => true, 'autocomplete' => 'email'])
-                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'phone', 'type' => 'tel', 'autocomplete' => 'tel'])
-                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'preferred_date', 'type' => 'date'])
-                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'message', 'type' => 'textarea', 'rows' => 4, 'default' => __('site.property.message_default', ['title' => $title])])
+                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'name', 'inputRequired' => true, 'inputAutocomplete' => 'name'])
+                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'email', 'inputType' => 'email', 'inputRequired' => true, 'inputAutocomplete' => 'email'])
+                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'phone', 'inputType' => 'tel', 'inputAutocomplete' => 'tel'])
+                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'preferred_date', 'inputType' => 'date'])
+                            @include('cms.partials.form-field', ['form' => $component, 'handle' => 'message', 'inputType' => 'textarea', 'inputRows' => 4, 'inputDefault' => __('site.property.message_default', ['title' => $title])])
                             {{ $component->captcha() }}
                             <button type="submit" class="btn btn-primary btn-block">{{ __('site.property.send') }}</button>
                         </x-sunrice-cms::form>

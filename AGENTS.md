@@ -16,7 +16,7 @@ packages/<name>/
 ## Rules
 
 - One change per branch and pull request, with a title that says what it does.
-- Every starter installs on a fresh app with no files kept (`tests/StartersTest.php` checks it, and that every page of its sitemap answers). A starter with its own behaviour has its own tests in `tests/<Name>/`.
+- Every starter installs on a fresh app with no files kept (`tests/StartersTest.php` checks it, and that every page of its sitemap answers, once, in the starter's layout: its site header carries `data-site-header`). Switch off the CMS's term and index pages in a collection (`collection_pages`) that the starter has no templates for. A starter with its own behaviour has its own tests in `tests/<Name>/`.
 - Templates use only the CMS's helpers and components and the starter package's own classes: never an app's (`App\…`).
 - Built assets live under `public/<folder of its own>/` with their own Vite manifest (the real-estate starter's `Assets::use()`), never `public/build`, so the app's own front end can't clash.
 - The starter's site words are in `lang/<locale>/site.php`, with the same keys in every language (a test checks).

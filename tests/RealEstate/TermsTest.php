@@ -64,3 +64,37 @@ it('shows a sample property\'s and post\'s terms, linked to their pages', functi
         ->assertSeeInOrder([$term('topics', 'buying-guides')->url(), $term('topics', 'living')->url()], false);
     $this->get('/properties?location=bali')->assertOk()->assertSee('Villa Arunika, Pererenan');
 });
+
+it('gives its terms only their shared pages, not the plain ones in each collection', function (): void {
+    foreach (['amenities' => 'properties', 'listing_types' => 'properties', 'locations' => 'properties', 'property_types' => 'properties', 'topics' => 'journal'] as $taxonomy => $collection) {
+        $pivot = Taxonomy::query()->where('handle', $taxonomy)->sole()->collections()->where('handle', $collection)->sole()->getRelation('pivot');
+        expect($pivot->term_pages)->toBeFalse("{$taxonomy} in {$collection}")
+            ->and($pivot->index_page)->toBeFalse("{$taxonomy} index in {$collection}");
+    }
+
+    $sitemap = (string) $this->get('/sitemap.xml')->assertOk()->getContent();
+    // A collection's term and index pages are at {its listing page}/{taxonomy handle}, in every language.
+    expect(preg_match('#<loc>[^<]*/(amenities|listing-types|locations|property-types|topics)(/[^<]*)?</loc>#', $sitemap))->toBe(0);
+    $this->get('/properties/locations/canggu')->assertNotFound();
+    $this->get('/properties/amenities/garden')->assertNotFound();
+    $this->get('/location/canggu')->assertOk()->assertSee('data-site-header', false);
+});
+
+it('links a property\'s type and place to their term pages, in each language', function (): void {
+    $this->get('/properties/villa-arunika-pererenan')->assertOk()
+        ->assertSee('href="'.url('/property-type/villa').'"', false)
+        ->assertSee('href="'.url('/location/canggu').'"', false);
+
+    $this->get('/id/properti/vila-arunika-pererenan')->assertOk()
+        ->assertSee('href="'.url('/id/tipe-properti/'), false)
+        ->assertSee('href="'.url('/id/lokasi/'), false)
+        ->assertDontSee('/id/properties/', false);
+});
+
+it('renders the inquiry form\'s fields with their own types, whatever the page calls its variables', function (): void {
+    $html = (string) $this->get('/properties/villa-arunika-pererenan')->assertOk()->getContent();
+
+    expect($html)->toContain('type="text" name="data[name]"')
+        ->toContain('type="email" name="data[email]"')
+        ->not->toContain('type="{');
+});

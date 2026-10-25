@@ -52,11 +52,11 @@
                 <h2 class="h3">{{ __('site.contact.form_title') }}</h2>
                 <x-sunrice-cms::form handle="contact" class="mt-6 grid gap-5 sm:grid-cols-2" replace>
                     @include('cms.partials.form-errors', ['form' => $component, 'class' => 'sm:col-span-2'])
-                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'name', 'required' => true, 'autocomplete' => 'name'])
-                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'email', 'type' => 'email', 'required' => true, 'autocomplete' => 'email'])
-                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'phone', 'type' => 'tel', 'autocomplete' => 'tel'])
-                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'topic', 'type' => 'select'])
-                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'message', 'type' => 'textarea', 'required' => true, 'class' => 'sm:col-span-2'])
+                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'name', 'inputRequired' => true, 'inputAutocomplete' => 'name'])
+                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'email', 'inputType' => 'email', 'inputRequired' => true, 'inputAutocomplete' => 'email'])
+                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'phone', 'inputType' => 'tel', 'inputAutocomplete' => 'tel'])
+                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'topic', 'inputType' => 'select'])
+                    @include('cms.partials.form-field', ['form' => $component, 'handle' => 'message', 'inputType' => 'textarea', 'inputRequired' => true, 'inputClass' => 'sm:col-span-2'])
                     {{ $component->captcha() }}
                     <div class="sm:col-span-2">
                         <button type="submit" class="btn btn-primary">{{ __('site.forms.send') }} @include('cms.partials.icon', ['name' => 'arrow-right', 'class' => 'arrow'])</button>
