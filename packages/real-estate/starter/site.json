@@ -2090,6 +2090,12 @@
             "collections": [
                 "properties"
             ],
+            "collection_pages": {
+                "properties": {
+                    "pages": false,
+                    "index": false
+                }
+            },
             "translations": {
                 "id": {
                     "title": "Fasilitas"
@@ -2112,7 +2118,8 @@
             "collection_pages": {
                 "properties": {
                     "single": true,
-                    "pages": true
+                    "pages": false,
+                    "index": false
                 }
             },
             "translations": {
@@ -2137,7 +2144,8 @@
             "collection_pages": {
                 "properties": {
                     "single": true,
-                    "pages": true
+                    "pages": false,
+                    "index": false
                 }
             },
             "translations": {
@@ -2167,7 +2175,8 @@
             "collection_pages": {
                 "properties": {
                     "single": true,
-                    "pages": true
+                    "pages": false,
+                    "index": false
                 }
             },
             "translations": {
@@ -2194,6 +2203,12 @@
             "collections": [
                 "journal"
             ],
+            "collection_pages": {
+                "journal": {
+                    "pages": false,
+                    "index": false
+                }
+            },
             "translations": {
                 "id": {
                     "title": "Topik jurnal"
