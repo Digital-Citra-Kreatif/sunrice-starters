@@ -1,7 +1,8 @@
 {{-- The site header: logo, the "main" menu (two levels, active states from the CMS), language switcher, mobile menu. --}}
 @php($menu = cms_menu('main'))
 <header class="site-header" data-site-header>
-    <div class="container-site flex h-[4.75rem] items-center justify-between gap-6 lg:h-[5.25rem]">
+    {{-- Page transitions replace what's inside the header (its active states, the switcher's links) with the next page's: the header itself stays. --}}
+    <div class="container-site flex h-[4.75rem] items-center justify-between gap-6 lg:h-[5.25rem]" data-swap="header">
         <a href="{{ $home }}" class="logo-link relative z-10 flex shrink-0 items-center" @if ($page?->home) aria-current="page" @endif>
             @include('cms.partials.logo', ['id' => 'logo-header', 'label' => $siteName, 'class' => 'h-10 w-auto lg:h-11'])
         </a>
@@ -47,7 +48,7 @@
     </div>
 
     @if ($menu !== [])
-        <nav id="mobile-nav" class="mobile-nav container-site max-h-[calc(100dvh-4.75rem)] overflow-y-auto pb-8 lg:hidden" aria-label="{{ __('site.nav.main') }}">
+        <nav id="mobile-nav" class="mobile-nav container-site max-h-[calc(100dvh-4.75rem)] overflow-y-auto pb-8 lg:hidden" aria-label="{{ __('site.nav.main') }}" data-swap="mobile-nav">
             <ul>
                 @foreach ($menu as $item)
                     <li>

@@ -25,17 +25,17 @@ it('links a translated page in each language, marking the current one', function
 
     expect($switcher)->not->toBeNull()
         ->toContain('aria-label="Languages"')
-        ->toContain('<a href="'.url('/properties/villa-samudra').'" hreflang="en" lang="en" aria-current="true">')
-        ->toContain('<a href="'.url('/id/properti/vila-samudra').'" hreflang="id" lang="id">')
+        ->toContain('<a href="'.url('/properties/villa-samudra').'" hreflang="en" lang="en" data-barba-prevent aria-current="true">')
+        ->toContain('<a href="'.url('/id/properti/vila-samudra').'" hreflang="id" lang="id" data-barba-prevent>')
         ->toContain('<span aria-hidden="true">ID</span>')
         ->toContain('<span class="visually-hidden">Bahasa Indonesia</span>');
     expect(languageSwitcher($this->get('/id/properti/vila-samudra')->getContent()))
-        ->toContain('<a href="'.url('/id/properti/vila-samudra').'" hreflang="id" lang="id" aria-current="true">');
+        ->toContain('<a href="'.url('/id/properti/vila-samudra').'" hreflang="id" lang="id" data-barba-prevent aria-current="true">');
 });
 
 it('links an untranslated page at its Indonesian address with the main-language fallback on', function (): void {
     expect(languageSwitcher($this->get('/about')->assertOk()->getContent()))
-        ->toContain('<a href="'.url('/id/about').'" hreflang="id" lang="id" data-fallback>');
+        ->toContain('<a href="'.url('/id/about').'" hreflang="id" lang="id" data-barba-prevent data-fallback>');
 });
 
 it('keeps the switcher with the fallback off, linking the Indonesian homepage', function (): void {
@@ -43,6 +43,6 @@ it('keeps the switcher with the fallback off, linking the Indonesian homepage', 
 
     $this->get('/id/about')->assertNotFound();
     expect(languageSwitcher($this->get('/about')->assertOk()->getContent()))->not->toBeNull()
-        ->toContain('<a href="'.url('/about').'" hreflang="en" lang="en" aria-current="true">')
-        ->toContain('<a href="'.url('/id').'" hreflang="id" lang="id" data-home>');
+        ->toContain('<a href="'.url('/about').'" hreflang="en" lang="en" data-barba-prevent aria-current="true">')
+        ->toContain('<a href="'.url('/id').'" hreflang="id" lang="id" data-barba-prevent data-home>');
 });

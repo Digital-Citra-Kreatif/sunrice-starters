@@ -9,7 +9,7 @@
     $footerMenu = cms_menu('footer');
     $legalMenu = cms_menu('legal');
 @endphp
-<footer class="mt-auto bg-teal-900 text-white/80" aria-labelledby="footer-title">
+<footer class="mt-auto bg-teal-900 text-white/80" aria-labelledby="footer-title" data-swap="footer">
     <h2 id="footer-title" class="visually-hidden">{{ __('site.footer.title') }}</h2>
 
     <div class="container-site grid gap-12 py-16 lg:grid-cols-12 lg:gap-10 lg:py-20">
