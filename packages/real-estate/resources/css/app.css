@@ -6,9 +6,11 @@
  * plain classes in @layer components, so templates stay readable. Fonts are self-hosted by
  * laravel-vite-plugin's font support (vite.config.js) and exposed as --font-serif / --font-sans.
  */
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
 
+/* Classes come from the templates only. `container` there is Barba's data-barba="container", not the utility. */
 @source '../views';
+@source not inline('container');
 
 
 @theme {

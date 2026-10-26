@@ -64,6 +64,28 @@ Term pages: `/property-type/{slug}`, `/location/{slug}` (with the places under i
 
 The installed `public/lumina` holds the built CSS, script and fonts; this package's [`resources/`](resources/README.md) has their sources (Tailwind CSS v4, self-hosted fonts). To change them, copy the sources into the app and build into `public/lumina`, as `resources/README.md` describes.
 
+## Page transitions
+
+Links between the site's pages fade the content out and the next page in, without reloading the header, footer, fonts and script ([Barba.js](https://barba.js.org), bundled into the built script; `resources/js/app.js` and `transitions.js`). Without JavaScript, or when anything goes wrong (a timeout, an error page, a hook failing), the page simply loads in full: every page works without the script.
+
+- **How**: `<body data-barba="wrapper">` in `cms/layout.blade.php` turns it on, and `<main id="main" data-barba="container" data-barba-namespace="…">` (the page's type: `entry`, `listing`, `term`, `search`, `taxonomy`, or `page` for the app's own pages) is what's swapped. The header and footer stay; their `data-swap` parts (the menus with their active states, the language switcher, the footer) are replaced with the next page's. The script also updates `document.title`, `<html lang>`, the SEO tags in the `<head>` (description, robots, canonical, hreflang, Open Graph and Twitter tags, structured data) and the body classes (the container's `data-body-class`, `Cms::bodyClass()`), scrolls to the top, focuses `#main`, says the new title in a polite live region for screen readers, and runs the gallery viewer, reveal on scroll and filter selects again on the new content.
+- **Turning them off**: remove `data-barba="wrapper"` from `<body>`. The rest of the markup is harmless without it.
+- **Reduced motion**: with `prefers-reduced-motion: reduce` the pages are swapped with no animation.
+- **What loads in full**: forms (Barba only follows links, so the inquiry, contact, newsletter and search forms and the property filters submit as usual), the language switcher (`data-barba-prevent` on its links, and any link with `hreflang`), links to other sites, `mailto:`/`tel:`, downloads, `target="_blank"`, `#` anchors and links with one, files (`.pdf`, `.xml`, …), `/admin` and `/storage` (`FULL_LOAD_PATHS` in `transitions.js`: add the panel's path if it isn't `/admin`), and anything with `data-barba-prevent` (`data-barba-prevent="all"` on an element covers the links inside it). A next page whose content has `<script>` or `<style>` of its own (a captcha, a map embed) and pages with the CMS's draft banner (signed-in editors) load in full too, and previews and drafts don't swap pages at all.
+- **Site code and analytics**: code outside `<main>`, including **Settings → Site code** and an analytics snippet, runs on the first page only. After each swapped page the script fires a `lumina:page` event on `document` with `detail: { url, namespace, container, trigger }` (`trigger`: `link`, `back`, `forward` or `popstate`). Count page views there:
+
+  ```html
+  <script>
+      document.addEventListener('lumina:page', (event) => {
+          gtag('event', 'page_view', { page_location: event.detail.url, page_title: document.title });
+      });
+  </script>
+  ```
+
+  It isn't fired for the first page, which the snippet counts itself.
+- **Content Security Policy**: nothing inline is added, so it works with `SUNRICE_SITE_CSP_ENABLED=true`: the next page is fetched from the site itself (`connect-src 'self'`, in the CMS's policy) and only its container and the tags above are taken from it.
+- **Page cache**: the script fetches the same HTML pages visitors get, so kept pages serve it too; it sends cookies as any same-site request does, and forms keep their CSRF token.
+
 ## Languages
 
 English is the main language (no prefix), Indonesian under `/id`. An untranslated page shows the English content at its `/id/…` address, marked `lang="en"` (the CMS's fallback). The site's own words are in `lang/{en,id}/site.php`: keep both in step (the starters' tests check they have the same keys).
