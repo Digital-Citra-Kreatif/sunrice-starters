@@ -7,9 +7,9 @@
     "require": {
         "php": "^8.4",
         "illuminate/support": "^13.0",
-        "sunrice/admin": "^0.1 || dev-main",
-        "sunrice/cms": "^0.1 || dev-main",
-        "sunrice/starter-kit": "^0.1 || dev-main"
+        "sunrice/admin": "^0.5 || dev-main",
+        "sunrice/cms": "^0.5 || dev-main",
+        "sunrice/starter-kit": "^0.5 || dev-main"
     },
     "autoload": {
         "psr-4": {
